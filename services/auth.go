@@ -2,6 +2,7 @@ package services
 
 import (
 	"SampleCrud/db"
+	"fmt"
 	"go.mongodb.org/mongo-driver/mongo"
 	"log"
 )
@@ -9,7 +10,8 @@ import (
 const collectionName string = "users"
 
 func getCollection() *mongo.Collection {
-	return db.GetDB().Collection(collectionName)
+	collection := db.GetDB().Collection(collectionName)
+	return collection
 }
 
 func Register(user db.User) *mongo.InsertOneResult {
@@ -17,6 +19,7 @@ func Register(user db.User) *mongo.InsertOneResult {
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println("Item has been inserted successfully")
 	return inserted
 }
 
